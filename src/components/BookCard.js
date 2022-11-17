@@ -60,7 +60,7 @@ export default function BookCard() {
 
     const handleAddToFav = async () => {
         try {
-        const response = await axios.post(`/books/favorite/${bookId}`,
+        const response = await axios.post(`/favoritebooks/${bookId}`,
         {},
             {
                 headers: {
