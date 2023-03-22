@@ -14,10 +14,11 @@ const useRefreshToken = () => {
             }
         
     });
-    var decoded = jwt_decode(response.data);
+    console.log("refresh: ",response.data)
+    var decoded = jwt_decode(response.data.token);
     var username = Object.values(decoded)[1];
     setAuth(prev => {
-        return {...prev, accessToken: response.data, isLogged: true, user: username}
+        return {...prev, accessToken: response.data.token, isLogged: true, user: username}
     });
     return response.data.accessToken;
 }

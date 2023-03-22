@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import SearchBar from "./SearchBar"
 import useLogout from '../hooks/useLogout';
 import useAuth from '../hooks/useAuth';
+import Search from './Search';
 
 
 
@@ -29,8 +30,8 @@ const Navbar = () => {
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box sx={{ flexGrow: 1,width: '100%', }}>
+      <AppBar position="static" sx={{backgroundColor: "#072F2E"}}>
         <Toolbar>
           
            
@@ -40,10 +41,11 @@ const Navbar = () => {
             
           </Typography>
           <Button color="inherit" sx={{ paddingLeft: 10}} component={Link} to={'/home'}>Home</Button>
-          <Button color="inherit" sx={{paddingLeft: 10}} component={Link} to={'/dashboard'}>Dashboard</Button>
+          <Button color="inherit" sx={{ paddingLeft: 10}} component={Link} to={'/recommendations'}>Recommendations</Button>
+          {/* <Button color="inherit" sx={{paddingLeft: 10}} component={Link} to={'/dashboard'}>Dashboard</Button> */}
 
-          <SearchBar />
-          
+         
+          <Search />
 
           {!auth?.accessToken ?   (<Button color="inherit" sx={{paddingLeft: 10}} component={Link} to={'/login'}>Login</Button> ):
            (<Button color="inherit" sx={{paddingLeft: 10}} onClick={signout}>Logout</Button>)} 

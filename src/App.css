@@ -1,0 +1,118 @@
+
+
+.landing-page {
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    background-color: #fcf6de;
+   
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 80px;
+    padding-right: 35px;
+    font-family: 'Josefin Sans';
+    font-size: 2.25rem;
+    font-weight: 400;
+    line-height: 32px;
+    display: flex;
+    box-sizing: border-box;
+  }
+  
+  .ladning-page-background {
+    
+    width: 100% ;
+    
+    min-height: 750px;
+    background-image: url("C:\Users\pc\DecentReadsFrontend\public\landing_page_background.png");
+    box-sizing: border-box;
+    background-position: center;
+    background-size: contain;
+    flex-direction: column;
+    flex-basis: 56%;
+    justify-content: center;
+    align-self: flex-start;
+    align-items: stretch;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    font-size: 2rem;
+    display: flex;
+    
+  }
+  
+  .book-wise-your-ultima {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 32px;
+    align-self: center;
+    margin-bottom: 84px;
+    align-self: flex-start;
+    line-height: 24px;
+    margin-left: 80px;
+    width: 1000px;
+  }
+  
+  .welcome-to-our-websi {
+    width: 600px;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 29px;
+    align-self: flex-start;
+    margin-left: 80px;
+  }
+  
+  .discover {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+    color: #33301f;
+    font-weight: 700;
+    line-height: 36px;
+  }
+  
+  .flex-container {
+    width: 85%;
+    flex-direction: row;
+    flex-basis: 7%;
+    justify-content: space-between;
+    align-items: stretch;
+    display: flex;
+  }
+  
+  .genre{
+    text-align: center;
+    color: #33301f;
+    height: 125px;
+    width: 330px;
+    background-color: #fff9f9bf;
+    flex-direction: row;
+    flex-basis: 21%;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1px;
+    margin-bottom: 30px;
+    font-family: 'DM Serif Display', 'Arial';
+    font-size: 1.625rem;
+    font-weight: 400;
+    line-height: 25px;
+    display: flex;
+    letter-spacing: 1px;
+    border-radius: 10px;
+  }
+  
+ 
+  
+ 
+  .flex-container-1 {
+    width: 85%;
+    flex-direction: row;
+    flex-basis: 8%;
+    justify-content: space-between;
+    align-items: stretch;
+    margin-bottom: 70px;
+    display: flex;
+  }
+ 

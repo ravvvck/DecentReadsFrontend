@@ -8,6 +8,8 @@ import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import { useParams } from 'react-router-dom'
 import axios from '../api/axios'
+import axios_rec_system from '../api/axios_rec_system'
+
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -16,18 +18,24 @@ import TextField from '@mui/material/TextField';
 import Rating from '@mui/material/Rating';
 import useAuth from '../hooks/useAuth';
 import ReviewCard from './ReviewCard';
+import BookRecommendationCard from './BookRecommendationCard';
+import CircularProgress from '@mui/material/CircularProgress';
+import Autocomplete from "@mui/material/Autocomplete";
+import lodash from "lodash";
 
 
 export default function BookCard() {
-    
+    const locationResults = [];
+    const [results, setResults] = useState({})
     const [book, setBook] = useState({})
     const [reviews, setReviews] = useState([])
+    const [recBooks, setRecBooks] = useState([])
     const { bookId } = useParams()
     const [open, setOpen] = useState(false);
     const [reviewContent, setReviewContent] = useState("")
     const [reviewRating, setReviewRating] = useState()
-
     const { auth } = useAuth();
+
     
 
     useEffect(() => {
@@ -36,8 +44,14 @@ export default function BookCard() {
 
                 const response = await axios.get(`/books/${bookId}`);
                 setBook(response.data);
+                console.log(response.data)
+
                 const reviewResponse = await axios.get(`/reviews/book/${bookId}`);
                 setReviews(reviewResponse.data);
+
+                const recBooksResponse = await axios_rec_system.get(`book?book_id=${bookId}`);
+                setRecBooks(recBooksResponse.data);
+                console.log("rec: ", recBooks)
             } catch (error) {
                 console.log(error);
             }
@@ -92,28 +106,99 @@ export default function BookCard() {
 
             setReviewContent("");
     }
+    
+    const [, setInputValue] = React.useState("");
+  const [options, setOptions] = React.useState([]);
+  const [data, setData] = React.useState([]);
+  useEffect(() => {
+    const url = `https://localhost:7259/api/books/search?name=`;
+    axios
+      .get(url)
+      .then(function(response) {
+        // handle success
+        const { status, data } = response;
+        if (status === 200) {
+          const b = lodash.map(data, "name");
+          // console.log(b);
+        }
+      })
+      .catch(function(error) {
+        // handle error
+        console.log(error);
+      });
+  }, []);
 
-   
-
-
+  const handleChange = event => {
+    setInputValue(event.target.value);
+    const url = `https://localhost:7259/api/books/search?name=${event.target.value}`;
+    axios
+      .get(url)
+      .then(function(response) {
+        // handle success
+        const { status, data } = response;
+        if (status === 200) {
+          console.log(data);
+          setOptions(data);
+          setData(data);
+        }
+      })
+      .catch(function(error) {
+        // handle error
+        console.log(error);
+      });
+  };
 
     return (
-        <Grid item xs={10} sx={{ marginTop: 10 }}>
-            <Grid container={true} spacing={8}>
-                <Grid item xs={4}  sx={{maxHeight:"450px"}}>
-                    <img className="bookcard-cover" src="https://d827xgdhgqbnd.cloudfront.net/wp-content/uploads/2016/04/09121712/book-cover-placeholder.png" 
-                   />
+       
+            <Grid container spacing={5} sx={{marginTop: '30px'}}>
+                <Grid item xs={3}  sx={{maxHeight:"450px"}}>
+                    <img className="bookcard-cover" src={book.image_URL}/>
+                    <Autocomplete
+                        id="google-map-demo"
+                        style={{ width: 300 }}
+                        getOptionLabel={option =>
+                        typeof option === "string" ? option : option.name
+                        }
+                        filterOptions={x => {
+                        return x;
+                        }}
+                        options={data.map((option) =>({id: option.id, name: option.name, author: option.author.fullName}))}
+                        autoComplete
+                        includeInputInList
+                        freeSolo
+                        disableOpenOnFocus
+                        renderInput={params => (
+                        <TextField
+                            {...params}
+                            label="Add a location"
+                            variant="outlined"
+                            fullWidth
+                            onChange={handleChange}
+                        />
+                        )}
+                        renderOption={option => {
+                        return (
+                            <Grid container alignItems="center">
+                                {console.log(option)}
+                            <Grid item xs>
+                                {option.key}
+                            </Grid>
+                            </Grid>
+                        );
+                        }}
+                    />
                 </Grid>
-                <Grid item xs={8} >
+                
+                <Grid item xs={5} >
                     < Stack direction="column" justifyContent="center" alignItems="center"  >
                         <Typography variant="h2" >
-                            {book.name}
+                            {book.name?.replace(/ *\([^)]*\) */g, "")}
                         </Typography>
                         <Divider />
 
 
                         <Typography variant="h3" >
-                            {book.authorFirstName} {book.authorLastName}
+                            {book.author} 
                         </Typography>
                         <Divider variant="middle" />
 
@@ -177,11 +262,27 @@ export default function BookCard() {
 
 
                     </Stack>
+                    
                 </Grid>
+                
+                <Grid item xs={1}  sx={{maxHeight:"450px"}}>
+                <Typography fontWeight="md" textColor="success.plainColor" mb={0.5}>
+                Similar books:
+                </Typography>
+                {/* {(recBooks.length === 0) ? (<CircularProgress/>) : ({recBooks.map((r,index) => <BookRecommendationCard key={index} {...r} />)})} */}
+                { recBooks.lenght < 1
+                  ? 
+                    
+                  <CircularProgress/> : recBooks.map((r,index) => <BookRecommendationCard key={index} {...r} />)
+             }
+                   
+                </Grid>
+              
+                
             </Grid>
+                                     
+            // {reviews.map((r,index) => <ReviewCard key={index} {...r} />)}
 
-            {reviews.map((r,index) => <ReviewCard key={index} {...r} />)}
-
-        </Grid>
+       
     )
 }

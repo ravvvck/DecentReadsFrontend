@@ -5,39 +5,48 @@ import { Grid, Stack } from '@mui/material/';
 
 export default function LandingPage() {
     return (
-        <Grid container spacing={0}
-        direction="column"
-        alignItems="center"
-        justifyContent="center" >
-            <Grid item xs={8}>
-                <Typography variant='h1' align='center' sx={{ color: "white" }}>
-
-                </Typography>
-            </Grid>
-
-            <Grid item xs={6}>
-                <Typography variant='h5' align='center' sx={{ color: "black", fontWeight: "normal", marginTop: '40px', marginBottom: '40px' }}>
-                    Demo project made with:
-                </Typography>
-            </Grid>
-
-            <Grid item xs={8} >
-                <Stack direction="row"
-
-                    justifyContent="center"
-                    alignItems="center"
-                    spacing={8}>
-
-                    <img src='/react_logo.png' className='landingpage--tech--logo--react' />
-                    <img src='/net_core_logo.png' className='landingpage--tech--logo' />
-                    <img src='/material_logo.png' className='landingpage--tech--logo' />
-
-                </Stack>
-            </Grid>
-
-
-
-        </Grid>
-
+        <div className="landing-page">
+        <div className="ladning-page-background">
+          <span className="book-wise-your-ultima">
+            BookWise: Your Ultimate Guide to Book Reviews and Recommendations
+          </span>
+          <span className="welcome-to-our-websi">
+            Welcome to our website, your ultimate destination for personalized
+            book recommendations based on your interests, favorite genres, and
+            reading history. Discover your next favorite read and enrich your
+            literary journey with our handpicked selection of books from various
+            genres and authors.
+          </span>
+        </div>
+        <span className="discover">Discover</span>
+        <div className="flex-container">
+          <button className="genre">
+            <span >Biography</span>
+          </button>
+          <button className="genre">
+            <span >Young Adult</span>
+          </button>
+          <button className="genre">
+            <span >Romance</span>
+          </button>
+          <button className="genre">
+            <span >Fantasy</span>
+          </button>
+        </div>
+        <div className="flex-container-1">
+          <button className="genre">
+            <span >Thriller</span>
+          </button>
+          <button className="genre">
+            <span >Science Fiction</span>
+          </button>
+          <button className="genre">
+            <span >Horror</span>
+          </button>
+          <button className="genre">
+            <span >Historical Fiction</span>
+          </button>
+        </div>
+      </div>
     )
 }

@@ -17,25 +17,30 @@ import Grid from '@mui/material/Grid';
 import PersistLogin from './components/PersistLogin';
 import LandingPage from './components/LandingPage';
 import SignUp from './components/Signup';
+import BookDetails from './components/BookDetails';
+import PersonalRecommendations  from './components/PersonalRecommendations';
 
 function App() {
   
   return (
     <div className="App">
       <Navbar />
-      <Container className='main--container' >
+      {/* <Container className='main--container' > */}
       <Routes>
       <Route element={<PersistLogin />}>
         <Route path="/" element={<Layout />}>
         <Route path="/home" element={<LandingPage />} />
-
-
-        <Route path="bookcard/:bookId" element={<Grid container spacing={5}>
+        
+        <Route path="/bookdetails/:bookId" element={<BookDetails />} />
+        <Route path="bookcard/:bookId" element={<Container >
               <BookCard />
-            </Grid>}>
+            </Container>}>
 
             <Route path=":bookId" element={<Grid container spacing={5}>
+            
+
               <BookCard />
+              
             </Grid>}></Route>
             </Route>
         
@@ -47,13 +52,15 @@ function App() {
             
               <Route element={<RequireAuth />}>
                 <Route path="dashboard/" element={<Dashboard />}></Route>
+                <Route path="/recommendations" element={<PersonalRecommendations />} />
               </Route>
             
           </Route>
           </Route>
 
         </Routes>
-        </Container>
+        
+        {/* </Container> */}
       
      
     </div>
