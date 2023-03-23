@@ -1,5 +1,5 @@
 
-# GoodreadsDotNetClone-react
+# DecentReads
 
 Frontend for my [.Net Core app](https://github.com/ravvvck/DecentReads).
 
