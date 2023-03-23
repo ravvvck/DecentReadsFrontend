@@ -1,7 +1,7 @@
 
 # GoodreadsDotNetClone-react
 
-Frontend for my [.Net Core app](https://github.com/ravvvck/GoodreadsDotNetClone).
+Frontend for my [.Net Core app](https://github.com/ravvvck/DecentReads).
 
 
 ## Tech Stack
